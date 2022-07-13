@@ -1437,8 +1437,9 @@ quitprompt(const Arg *arg)
 		restart = 0;
 		quit(NULL);
 	} else if (strcmp(response, "restart")) {
-		restart = 1;
-		running = 0;
+		// FIXME
+		//restart = 1;
+		//running = 0;
 	}
 }
 
