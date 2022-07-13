@@ -201,6 +201,7 @@ static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
 static void pop(Client *);
 static void propertynotify(XEvent *e);
+static void quitprompt(const Arg *arg);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
@@ -297,6 +298,7 @@ static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
 static KeySym keychain = -1;
+static int restart = 1;  // 1 if dwm should restart after quitting
 
 static xcb_connection_t *xcon;
 
@@ -1423,6 +1425,20 @@ propertynotify(XEvent *e)
 		}
 		if (ev->atom == netatom[NetWMWindowType])
 			updatewindowtype(c);
+	}
+}
+
+void
+quitprompt(const Arg *arg)
+{
+	// string var for response
+	char *response = system("echo -e \"no\nrestart\nyes\" | dmenu -i -sb red -p \"Quit DWM?\"");
+	if (strcmp(response, "yes")) {
+		restart = 0;
+		quit(NULL);
+	} else if (strcmp(response, "restart")) {
+		restart = 1;
+		running = 0;
 	}
 }
 
@@ -2713,6 +2729,9 @@ main(int argc, char *argv[])
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
+	if (restart = 1) {
+		system("exec dwm");
+	}
 	return EXIT_SUCCESS;
 }
 
