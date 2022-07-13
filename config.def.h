@@ -112,6 +112,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_a,       XK_t,      spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             -1,         XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             -1,         XK_k,      movestack,      {.i = -1 } },
+    { MODKEY,                       -1,         XK_s,      scratchpad_show, {.i = 1} },
+    { MODKEY,                       -1,         XK_y,      scratchpad_show, {.i = 2} },
+    { MODKEY,                       -1,         XK_u,      scratchpad_show, {.i = 3} },
+    { MODKEY|ShiftMask,             -1,         XK_s,      scratchpad_hide, {.i = 1} }, // create scratchpad
+    { MODKEY|ShiftMask,             -1,         XK_y,      scratchpad_hide, {.i = 2} },
+    { MODKEY|ShiftMask,             -1,         XK_u,      scratchpad_hide, {.i = 3} },
+	{ MODKEY|ShiftMask,             -1,         XK_r,      scratchpad_remove,           {0} },
 };
 
 /* button definitions */
