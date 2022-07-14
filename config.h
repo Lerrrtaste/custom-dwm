@@ -24,7 +24,6 @@ static const char *colors[][3]      = {
 static const char *const autostart[] = {
 	"xcape", "-e", "#66=Escape", NULL,
 	"picom", NULL,
-	"autorandr", "horizontal", NULL,
 	NULL /* terminate */
 };
 

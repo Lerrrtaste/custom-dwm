@@ -1178,6 +1178,14 @@ keypress(XEvent *e)
 }
 
 void
+killclientprompt(const Arg *arg)
+{
+	char *response = system("echo -e \"no\nyes\" | dmenu -i -p \"Quit Client?\"");
+	if (strcmp(response, "yes")) {
+		killclient(NULL);
+	}
+}
+void
 killclient(const Arg *arg)
 {
 	if (!selmon->sel)
