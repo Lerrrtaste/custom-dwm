@@ -47,9 +47,11 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
+#include "layouts.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
+	{ "HHH",      grid },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
@@ -86,11 +88,6 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       -1,         XK_Return, zoom,           {0} },
 	{ MODKEY,                       -1,         XK_Tab,    view,           {0} },
-	{ MODKEY,                       -1,         XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       -1,         XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       -1,         XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       -1,         XK_u,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       -1,         XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       -1,         XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             -1,         XK_space,  togglefloating, {0} },
 	{ MODKEY,                       -1,         XK_0,      view,           {.ui = ~0 } },
@@ -119,6 +116,14 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             -1,         XK_y,      scratchpad_hide, {.i = 2} },
     { MODKEY|ShiftMask,             -1,         XK_u,      scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             -1,         XK_r,      scratchpad_remove,           {0} },
+
+	/* layouts */
+	{ MODKEY,                       -1,         XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       -1,         XK_g,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       -1,         XK_f,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       -1,         XK_m,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       -1,         XK_u,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       -1,         XK_o,      setlayout,      {.v = &layouts[5]} },
 
 	/* quitting things */
 	// M-C c to quit kill client
