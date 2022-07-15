@@ -86,7 +86,6 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       -1,         XK_Return, zoom,           {0} },
 	{ MODKEY,                       -1,         XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             -1,         XK_c,      killclient,     {0} },
 	{ MODKEY,                       -1,         XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       -1,         XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       -1,         XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -109,7 +108,6 @@ static Key keys[] = {
 	TAGKEYS(                        -1,         XK_7,                      6)
 	TAGKEYS(                        -1,         XK_8,                      7)
 	TAGKEYS(                        -1,         XK_9,                      8)
-	{ MODKEY|ShiftMask,             -1,         XK_q,      quitprompt,           {0} },
 	{ MODKEY,                       XK_a,       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_a,       XK_t,      spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             -1,         XK_j,      movestack,      {.i = +1 } },
@@ -121,6 +119,15 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             -1,         XK_y,      scratchpad_hide, {.i = 2} },
     { MODKEY|ShiftMask,             -1,         XK_u,      scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             -1,         XK_r,      scratchpad_remove,           {0} },
+
+	/* quitting things */
+	// M-C c to quit kill client
+	{ MODKEY|ShiftMask,             XK_c,         XK_c,      killclient,     {0} },
+	// M-C q to quit dwm
+	{ MODKEY|ShiftMask,             XK_c,         XK_q,      quit,           {0} },
+	// M-Q to restart dwm TODO
+	// { MODKEY|ShiftMask,             -1,           XK_q,      quit,           {0} },
+
 };
 
 /* button definitions */
