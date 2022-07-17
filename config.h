@@ -36,7 +36,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      	     instance    title    tags mask     isfloating   CenterThisWindow?     isterminal      noswallow     monitor */
-	{ "st",              NULL,       NULL,    0,            0,     	     1, 		           1,              0,            -1 },
+	{ "st",              NULL,       NULL,    0,            0,     	     0, 		           1,              0,            -1 },
 	{ "Gimp",            NULL,       NULL,    0,            1,           0,                    0,              0,            -1 },
 	{ "Firefox",         NULL,       NULL,    1 << 8,       0,           0,                    0,             -1,            -1 },
 };
@@ -123,12 +123,8 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         XK_o,      setlayout,      {.v = &layouts[5]} },
 
 	/* quitting things */
-	// M-C c to quit kill client
 	{ MODKEY|ShiftMask,             XK_c,         XK_c,      killclient,     {0} },
-	// M-C q to quit dwm
 	{ MODKEY|ShiftMask,             XK_c,         XK_q,      quit,           {0} },
-	// M-Q to restart dwm TODO
-	// { MODKEY|ShiftMask,             -1,           XK_q,      quit,           {0} },
 
 };
 
