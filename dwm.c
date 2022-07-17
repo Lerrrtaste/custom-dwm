@@ -1438,14 +1438,30 @@ void
 quitprompt(const Arg *arg)
 {
 	// string var for response
-	char *response = system("echo -e \"no\nrestart\nyes\" | dmenu -i -sb red -p \"Quit DWM?\"");
-	if (strcmp(response, "yes")) {
-		restart = 0;
-		quit(NULL);
-	} else if (strcmp(response, "restart")) {
-		// FIXME
-		//restart = 1;
-		//running = 0;
+	//char *response = system("echo -e \"no\nrestart\nyes\" | dmenu -i -sb red -p \"Quit DWM?\"");
+	FILE *pp = popen("echo -e \"no\nrestart\nyes\" | dmenu -i -sb red -p \"Quit DWM?\"", "r");
+
+	while(pp != NULL) {
+		char buf[1024];
+		if (fgets(buf, sizeof(buf), pp) == NULL) {
+			fprintf(stderr, "Quitprompt: Error reading pipe!\n");
+			return;
+		}
+		if (strcmp(buf, "yes\n") == 0) {
+			quit(NULL);
+		} else if (strcmp(buf, "restart\n") == 0) {
+			// create file /tmp/dwmrestart.lock
+			FILE *fp = fopen("/tmp/dwmrestart.lock", "w");
+			if (fp == NULL) {
+				fprintf(stderr, "Quitprompt: Error creating /tmp/dwmrestart.lock file!\n");
+				return;
+			}
+			fclose(fp);
+			quit(NULL);
+		} else if (strcmp(buf, "no\n") == 0) {
+			pclose(pp);
+			return;
+		}
 	}
 }
 

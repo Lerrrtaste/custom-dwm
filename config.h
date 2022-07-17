@@ -132,7 +132,7 @@ static Key keys[] = {
 
 	/* quitting things (Mod-c) */
 	{ MODKEY|ShiftMask,             XK_c,         XK_c,      killclient,     {0} },
-	{ MODKEY|ShiftMask,             XK_c,         XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_c,         XK_q,      quitprompt,           {0} },
 
 };
 
