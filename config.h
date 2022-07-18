@@ -114,12 +114,12 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,       XK_e,      spawn,          {.v = emacsclientcmd } },
 
 	/* scratchpads (Mod-a)*/
-    { MODKEY,                       XK_a,         XK_a,      scratchpad_show, {.i = 1} },
-    { MODKEY,                       XK_a,         XK_s,      scratchpad_show, {.i = 2} },
-    { MODKEY,                       XK_a,         XK_d,      scratchpad_show, {.i = 3} },
-    { MODKEY|ShiftMask,             XK_a,         XK_a,      scratchpad_hide, {.i = 1} }, // create scratchpad
-    { MODKEY|ShiftMask,             XK_a,         XK_s,      scratchpad_hide, {.i = 2} },
-    { MODKEY|ShiftMask,             XK_a,         XK_d,      scratchpad_hide, {.i = 3} },
+    { MODKEY,                       XK_a,         XK_j,      scratchpad_show, {.i = 1} },
+    { MODKEY,                       XK_a,         XK_k,      scratchpad_show, {.i = 2} },
+    { MODKEY,                       XK_a,         XK_l,      scratchpad_show, {.i = 3} },
+    { MODKEY|ShiftMask,             XK_a,         XK_j,      scratchpad_hide, {.i = 1} }, // create scratchpad
+    { MODKEY|ShiftMask,             XK_a,         XK_k,      scratchpad_hide, {.i = 2} },
+    { MODKEY|ShiftMask,             XK_a,         XK_l,      scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             XK_a,         XK_r,      scratchpad_remove,           {0} },
 
 	/* layouts */
