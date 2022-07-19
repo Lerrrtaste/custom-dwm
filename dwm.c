@@ -1437,26 +1437,20 @@ propertynotify(XEvent *e)
 void
 quitprompt(const Arg *arg)
 {
-	// string var for response
-	//char *response = system("echo -e \"no\nrestart\nyes\" | dmenu -i -sb red -p \"Quit DWM?\"");
 	FILE *pp = popen("echo -e \"no\nrestart\nyes\" | dmenu -i -sb red -p \"Quit DWM?\"", "r");
-
-	while(pp != NULL) {
+	if(pp != NULL) {
 		char buf[1024];
 		if (fgets(buf, sizeof(buf), pp) == NULL) {
 			fprintf(stderr, "Quitprompt: Error reading pipe!\n");
 			return;
 		}
 		if (strcmp(buf, "yes\n") == 0) {
+			pclose(pp);
+			restart = 0;
 			quit(NULL);
 		} else if (strcmp(buf, "restart\n") == 0) {
-			// create file /tmp/dwmrestart.lock
-			FILE *fp = fopen("/tmp/dwmrestart.lock", "w");
-			if (fp == NULL) {
-				fprintf(stderr, "Quitprompt: Error creating /tmp/dwmrestart.lock file!\n");
-				return;
-			}
-			fclose(fp);
+			pclose(pp);
+			restart = 1;
 			quit(NULL);
 		} else if (strcmp(buf, "no\n") == 0) {
 			pclose(pp);
@@ -2745,7 +2739,7 @@ main(int argc, char *argv[])
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
-	if (restart = 1) {
+	if (restart == 1) {
 		system("exec dwm");
 	}
 	return EXIT_SUCCESS;
