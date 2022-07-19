@@ -24,6 +24,7 @@ static const char *colors[][3]      = {
 static const char *const autostart[] = {
 	"xcape", "-e", "#66=Escape", NULL,
 	"picom", NULL,
+	"autrandr", "horizontal", NULL,
 	NULL /* terminate */
 };
 
@@ -75,43 +76,24 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *firefoxcmd[]  = { "firefox", "--new-window", NULL };
 static const char *emacsclientcmd[]  = { "emacsclient", "--create-frame", "-a" "emacs", NULL };
+static const char *keepasscmd[]  = { "keepassxc", NULL };
 
+#include "movestack.c"
 static Key keys[] = {
 	/* modifier                     chain key   key        function        argument */
+	/* general */
 	{ MODKEY,                       -1,         XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             -1,         XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       -1,         XK_b,      togglebar,      {0} },
-	{ MODKEY,                       -1,         XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       -1,         XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       -1,         XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       -1,         XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       -1,         XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       -1,         XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       -1,         XK_Return, zoom,           {0} },
 	{ MODKEY,                       -1,         XK_Tab,    view,           {0} },
-	{ MODKEY,                       -1,         XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             -1,         XK_space,  togglefloating, {0} },
-	{ MODKEY,                       -1,         XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             -1,         XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       -1,         XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       -1,         XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             -1,         XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             -1,         XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                        -1,         XK_1,                      0)
-	TAGKEYS(                        -1,         XK_2,                      1)
-	TAGKEYS(                        -1,         XK_3,                      2)
-	TAGKEYS(                        -1,         XK_4,                      3)
-	TAGKEYS(                        -1,         XK_5,                      4)
-	TAGKEYS(                        -1,         XK_6,                      5)
-	TAGKEYS(                        -1,         XK_7,                      6)
-	TAGKEYS(                        -1,         XK_8,                      7)
-	TAGKEYS(                        -1,         XK_9,                      8)
 
 	/* programs (Mod-s)*/
 	{ MODKEY,                       XK_s,       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_s,       XK_t,      spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_s,       XK_b,      spawn,          {.v = firefoxcmd } },
 	{ MODKEY,                       XK_s,       XK_e,      spawn,          {.v = emacsclientcmd } },
+	{ MODKEY,                       XK_s,       XK_k,      spawn,          {.v = keepasscmd } },
 
 	/* scratchpads (Mod-a)*/
     { MODKEY,                       XK_a,         XK_j,      scratchpad_show, {.i = 1} },
@@ -122,13 +104,46 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_a,         XK_l,      scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             XK_a,         XK_r,      scratchpad_remove,           {0} },
 
-	/* layouts */
+	/* switch layouts */
 	{ MODKEY,                       -1,         XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       -1,         XK_g,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       -1,         XK_f,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       -1,         XK_m,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       -1,         XK_u,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       -1,         XK_o,      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY,                       -1,         XK_space,  setlayout,      {0} },
+	{ MODKEY|ShiftMask,             -1,         XK_space,  togglefloating, {0} },
+
+	/* layout options */
+	{ MODKEY,                       -1,         XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY,                       -1,         XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       -1,         XK_h,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       -1,         XK_l,      setmfact,       {.f = +0.05} },
+
+	/* clients */
+	{ MODKEY|ShiftMask,             -1,         XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             -1,         XK_k,      movestack,      {.i = -1 } },
+	{ MODKEY,                       -1,         XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       -1,         XK_k,      focusstack,     {.i = -1 } },
+
+	/* monitors */
+	{ MODKEY|ShiftMask,             -1,         XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             -1,         XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       -1,         XK_comma,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       -1,         XK_period, focusmon,       {.i = +1 } },
+
+	/* tags */
+	{ MODKEY,                       -1,         XK_0,      view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             -1,         XK_0,      tag,            {.ui = ~0 } },
+	TAGKEYS(                        -1,         XK_1,                      0)
+	TAGKEYS(                        -1,         XK_2,                      1)
+	TAGKEYS(                        -1,         XK_3,                      2)
+	TAGKEYS(                        -1,         XK_4,                      3)
+	TAGKEYS(                        -1,         XK_5,                      4)
+	TAGKEYS(                        -1,         XK_6,                      5)
+	TAGKEYS(                        -1,         XK_7,                      6)
+	TAGKEYS(                        -1,         XK_8,                      7)
+	TAGKEYS(                        -1,         XK_9,                      8)
 
 	/* quitting things (Mod-c) */
 	{ MODKEY|ShiftMask,             XK_c,         XK_c,      killclient,     {0} },
