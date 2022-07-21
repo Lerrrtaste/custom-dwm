@@ -24,7 +24,6 @@ static const char *colors[][3]      = {
 static const char *const autostart[] = {
 	"xcape", "-e", "#66=Escape", NULL,
 	"picom", NULL,
-	"autrandr", "horizontal", NULL,
 	NULL /* terminate */
 };
 
@@ -77,6 +76,8 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *firefoxcmd[]  = { "firefox", "--new-window", NULL };
 static const char *emacsclientcmd[]  = { "emacsclient", "--create-frame", "-a" "emacs", NULL };
 static const char *keepasscmd[]  = { "keepassxc", NULL };
+static const char *slockcmd[]  = { "slock", NULL };
+
 
 #include "movestack.c"
 static Key keys[] = {
@@ -94,6 +95,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,       XK_b,      spawn,          {.v = firefoxcmd } },
 	{ MODKEY,                       XK_s,       XK_e,      spawn,          {.v = emacsclientcmd } },
 	{ MODKEY,                       XK_s,       XK_k,      spawn,          {.v = keepasscmd } },
+
+	/* shortcuts */
+	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date -Is).png") },
+	{ MODKEY,                       XK_s,         XK_l,      spawn,          {.v = slockcmd} },
+
 
 	/* scratchpads (Mod-a)*/
     { MODKEY,                       XK_a,         XK_j,      scratchpad_show, {.i = 1} },
