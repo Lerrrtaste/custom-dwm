@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
@@ -60,6 +60,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod1Mask
+#define SUPERKEY Mod4Mask
 #define TAGKEYS(CHAIN,KEY,TAG) \
 	{ MODKEY,                       CHAIN,    KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           CHAIN,    KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -77,27 +78,29 @@ static const char *firefoxcmd[]  = { "firefox", "--new-window", NULL };
 static const char *emacsclientcmd[]  = { "emacsclient", "--create-frame", "-a" "emacs", NULL };
 static const char *keepasscmd[]  = { "keepassxc", NULL };
 static const char *slockcmd[]  = { "slock", NULL };
+static const char *autorandrcmd[]  = { "autorandr", "horizontal", NULL };
 
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     chain key   key        function        argument */
 	/* general */
-	{ MODKEY,                       -1,         XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             -1,         XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       -1,         XK_b,      togglebar,      {0} },
 	{ MODKEY,                       -1,         XK_Return, zoom,           {0} },
 	{ MODKEY,                       -1,         XK_Tab,    view,           {0} },
 
 	/* programs (Mod-s)*/
-	{ MODKEY,                       XK_s,       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_s,       XK_t,      spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_s,       XK_b,      spawn,          {.v = firefoxcmd } },
-	{ MODKEY,                       XK_s,       XK_e,      spawn,          {.v = emacsclientcmd } },
-	{ MODKEY,                       XK_s,       XK_k,      spawn,          {.v = keepasscmd } },
+	{ SUPERKEY,                       XK_space,       XK_space,  spawn,          {.v = dmenucmd } },
+	{ MODKEY,                         -1,             XK_p,      spawn,          {.v = dmenucmd } },
+	{ SUPERKEY,                       XK_space,       XK_t,      spawn,          {.v = termcmd } },
+	{ SUPERKEY,                       XK_space,       XK_b,      spawn,          {.v = firefoxcmd } },
+	{ SUPERKEY,                       XK_space,       XK_e,      spawn,          {.v = emacsclientcmd } },
+	{ SUPERKEY,                       XK_space,       XK_k,      spawn,          {.v = keepasscmd } },
 
 	/* shortcuts */
-	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date -Is).png") },
+	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H:%M:%SZ').png") },
+	{ MODKEY,                       XK_s,         XK_r,      spawn,          {.v = autorandr} },
 	{ MODKEY,                       XK_s,         XK_l,      spawn,          {.v = slockcmd} },
 
 
