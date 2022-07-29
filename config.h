@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 4;        /* border pixel of windows */
+static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
@@ -100,7 +100,7 @@ static Key keys[] = {
 
 	/* shortcuts */
 	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H:%M:%SZ').png") },
-	{ MODKEY,                       XK_s,         XK_r,      spawn,          {.v = autorandr} },
+	{ MODKEY,                       XK_s,         XK_r,      spawn,          {.v = autorandrcmd} },
 	{ MODKEY,                       XK_s,         XK_l,      spawn,          {.v = slockcmd} },
 
 
