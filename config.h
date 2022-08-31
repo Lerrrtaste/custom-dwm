@@ -94,7 +94,7 @@ static Key keys[] = {
 	{ SUPERKEY,                       XK_space,       XK_space,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,                         -1,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ SUPERKEY,                       XK_space,       XK_t,      spawn,          {.v = termcmd } },
-	{ SUPERKEY,                       XK_space,       XK_b,      spawn,          {.v = firefoxcmd } },
+	{ SUPERKEY,                       XK_space,       XK_f,      spawn,          {.v = firefoxcmd } },
 	{ SUPERKEY,                       XK_space,       XK_e,      spawn,          {.v = emacsclientcmd } },
 	{ SUPERKEY,                       XK_space,       XK_k,      spawn,          {.v = keepasscmd } },
 
