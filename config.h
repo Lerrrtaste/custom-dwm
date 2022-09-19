@@ -99,7 +99,7 @@ static Key keys[] = {
 	{ SUPERKEY,                       XK_space,       XK_k,      spawn,          {.v = keepasscmd } },
 
 	/* shortcuts */
-	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H:%M:%SZ').png") },
+	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H-%M-%S').png") },
 	{ MODKEY,                       XK_s,         XK_r,      spawn,          {.v = autorandrcmd} },
 	{ MODKEY,                       XK_s,         XK_l,      spawn,          {.v = slockcmd} },
 
