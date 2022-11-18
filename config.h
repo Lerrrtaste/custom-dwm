@@ -29,6 +29,8 @@ static const char *const autostart[] = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tagsalt[] = { "3", "4", "5", "5", "6", "7", "8", "9", "10" };
+static const int momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -144,6 +146,7 @@ static Key keys[] = {
 	/* tags */
 	{ MODKEY,                       -1,         XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             -1,         XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY,                       -1,         XK_n,      togglealttag,   {0} },
 	TAGKEYS(                        -1,         XK_1,                      0)
 	TAGKEYS(                        -1,         XK_2,                      1)
 	TAGKEYS(                        -1,         XK_3,                      2)

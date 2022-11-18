@@ -27,6 +27,8 @@ static const char *const autostart[] = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tagsalt[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const int momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -122,6 +124,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             -1,         XK_y,      scratchpad_hide, {.i = 2} },
     { MODKEY|ShiftMask,             -1,         XK_u,      scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             -1,         XK_r,      scratchpad_remove,           {0} },
+    { MODKEY,                       -1,         XK_n,      togglealttag,   {0} },
 };
 
 /* button definitions */
