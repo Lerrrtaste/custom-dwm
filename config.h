@@ -58,6 +58,8 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
+	{ "TTT",      bstack },
+	{ "===",      bstackhoriz },
 };
 
 /* key definitions */
@@ -116,12 +118,14 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_a,         XK_r,      scratchpad_remove,           {0} },
 
 	/* switch layouts */
-	{ MODKEY,                       -1,         XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       -1,         XK_g,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       -1,         XK_f,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       -1,         XK_m,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       -1,         XK_u,      setlayout,      {.v = &layouts[4]} },
-	{ MODKEY,                       -1,         XK_o,      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY,                       -1,         XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
+	{ MODKEY,                       -1,         XK_g,      setlayout,      {.v = &layouts[1]} }, // grid
+	{ MODKEY,                       -1,         XK_f,      setlayout,      {.v = &layouts[2]} }, // floating
+	{ MODKEY,                       -1,         XK_m,      setlayout,      {.v = &layouts[3]} }, // monocel
+	{ MODKEY,                       -1,         XK_u,      setlayout,      {.v = &layouts[4]} }, // centered master
+	{ MODKEY,                       -1,         XK_o,      setlayout,      {.v = &layouts[5]} }, // centered floating master
+	/* { MODKEY|ShiftMask,             -1,         XK_t,      setlayout,      {.v = &layouts[6]} }, // bottom stack */
+	{ MODKEY|ShiftMask,             -1,         XK_t,      setlayout,      {.v = &layouts[7]} }, // bottom stack horizontal
 	{ MODKEY,                       -1,         XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             -1,         XK_space,  togglefloating, {0} },
 
