@@ -52,6 +52,7 @@ static const Rule rules[] = {
 	{ "firefox",         NULL,       NULL,    1 << 0,       0,           0,             -1,            -1 },
 	{ "Emacs",  		 NULL,       NULL,    1 << 1,       0,           0,             -1,            -1 },
 	{ "Microsoft Teams - Preview",NULL,NULL,  1 << 4,       0,           0,             -1,            -1 },
+	{ "Steam",           NULL,       NULL,    1 << 8,       1,           0,             -1,            -1 },
 };
 
 /* layout(s) */
@@ -118,7 +119,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,         XK_r,      spawn,          {.v = autorandrcmd} },
 	{ MODKEY,                       XK_s,         XK_l,      spawn,          {.v = slockcmd} },
 
-
 	/* scratchpads (Mod-a)*/
     { MODKEY,                       XK_a,         XK_j,      scratchpad_show, {.i = 1} },
     { MODKEY,                       XK_a,         XK_k,      scratchpad_show, {.i = 2} },
@@ -145,6 +145,9 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       -1,         XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       -1,         XK_l,      setmfact,       {.f = +0.05} },
+ 	{ MODKEY|ShiftMask,             -1,         XK_h,      setcfact,       {.f = +0.25} },
+ 	{ MODKEY|ShiftMask,             -1,         XK_l,      setcfact,       {.f = -0.25} },
+ 	{ MODKEY|ShiftMask,             -1,         XK_o,      setcfact,       {.f =  0.00} },
 
 	/* clients */
 	{ MODKEY|ShiftMask,             -1,         XK_j,      movestack,      {.i = +1 } },
