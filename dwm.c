@@ -2912,50 +2912,87 @@ centeredfloatingmaster(Monitor *m)
 }
 
 void
-bstack(Monitor *m)
-{
-	unsigned int i, n, w, mh, mx, tx;
+bstack(Monitor *m) {
+	int w, h, mh, mx, tx, ty, tw;
+	unsigned int i, n;
 	float mfacts = 0, sfacts = 0;
 	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) {
-		if (n < m->nmaster)
-			mfacts += c->cfact;
-		else
-			sfacts += c->cfact;
+ 		if (n < m->nmaster)
+ 			mfacts += c->cfact;
+ 		else
+ 			sfacts += c->cfact;
 	}
 	if (n == 0)
 		return;
-	if(n == 1){
-		c = nexttiled(m->clients);
-		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
-		return;
-	}
-
-	if (n > m->nmaster)
-		mh = m->nmaster ? m->wh * m->mfact : 0;
-	else
+ 	if (n == 1){
+ 		c = nexttiled(m->clients);
+ 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
+ 		return;
+ 	}
+	if (n > m->nmaster) {
+		mh = m->nmaster ? m->mfact * m->wh : 0;
+		/* tw = m->ww / (n - m->nmaster); */
+		/* ty = m->wy + mh; */
+	} else {
 		mh = m->wh;
-	for (i = 0, mx = tx = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		/* tw = m->ww; */
+		/* ty = m->wy; */
+	}
+	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
 		if (i < m->nmaster) {
-			w = (m->ww - mx) * (c->cfact / mfacts);
-			resize(c, m->wx + mx, m->wy, w - (2*c->bw), mh - 2*c->bw, 0);
-			if(mx + WIDTH(c) < m->mw)
-				mx += WIDTH(c);
-			mfacts -= c->cfact;
+ 			w = (m->ww - mx) * (c->cfact / mfacts);
+ 			resize(c, m->wx + mx, m->wy, w - (2*c->bw), mh - 2*c->bw, 0);
+ 			if(mx + WIDTH(c) < m->mw)
+ 				mx += WIDTH(c);
+ 			mfacts -= c->cfact;
 		} else {
-			w = (m->ww - tx) * (c->cfact / sfacts);
-			resize(c, m->wx + tx, m->wy + mh, w - (2*c->bw), m->wh - mh - 2*(c->bw), 0);
-			if(tx + WIDTH(c) < m->mw)
-				tx += WIDTH(c);
-			sfacts -= c->cfact;
+ 			w = (m->ww - tx) * (c->cfact / sfacts);
+ 			resize(c, m->wx + tx, m->wy + mh, w - (2*c->bw), m->wh - mh - 2*(c->bw), 0);
+ 			if(tx + WIDTH(c) < m->mw)
+ 				tx += WIDTH(c);
+ 			sfacts -= c->cfact;
 		}
 }
 
+
+/* old */
+/* void */
+/* bstackhoriz(Monitor *m) { */
+/* 	int w, mh, mx, tx, ty, th; */
+/* 	unsigned int i, n; */
+/* 	Client *c; */
+
+/* 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++); */
+/* 	if (n == 0) */
+/* 		return; */
+/* 	if (n > m->nmaster) { */
+/* 		mh = m->nmaster ? m->mfact * m->wh : 0; */
+/* 		th = (m->wh - mh) / (n - m->nmaster); */
+/* 		ty = m->wy + mh; */
+/* 	} else { */
+/* 		th = mh = m->wh; */
+/* 		ty = m->wy; */
+/* 	} */
+/* 	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) { */
+/* 		if (i < m->nmaster) { */
+/* 			w = (m->ww - mx) / (MIN(n, m->nmaster) - i); */
+/* 			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0); */
+/* 			mx += WIDTH(c); */
+/* 		} else { */
+/* 			resize(c, tx, ty, m->ww - (2 * c->bw), th - (2 * c->bw), 0); */
+/* 			if (th != m->wh) */
+/* 				ty += HEIGHT(c); */
+/* 		} */
+/* 	} */
+/* } */
+
+/* new */
 void
 bstackhoriz(Monitor *m)
 {
-	unsigned int i, n, h, mw, mh, my, ty;
+	unsigned int i, n, w, h, mw, mx, mh, my, ty, tx;
 	float mfacts = 0, sfacts = 0;
 	Client *c;
 
@@ -2979,12 +3016,12 @@ bstackhoriz(Monitor *m)
 		mh = m->wh;
 	mw = m->ww;
 
-	for (i = ty = 0, my = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+ 	for (i = mx = 0, ty = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
 		if (i < m->nmaster) {
-			h = (mh - my) * (c->cfact / mfacts);
-			resize(c, m->wx, m->wy + my, mw - 2*c->bw, h - 2*c->bw, 0);
-			if(my + HEIGHT(c) < m->mh)
-				my += HEIGHT(c);
+			w = (mw - mx) * (c->cfact / mfacts);
+			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0);
+			/* if(mx + WIDTH(c) < m->mx) */
+			mx += WIDTH(c);
 			mfacts -= c->cfact;
 		} else {
 			h = (m->wh - mh - ty) * (c->cfact / sfacts);
