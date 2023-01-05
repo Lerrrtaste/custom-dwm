@@ -53,6 +53,7 @@ static const Rule rules[] = {
 	{ "Emacs",  		 NULL,       NULL,    1 << 1,       0,           0,             -1,            -1 },
 	{ "Microsoft Teams - Preview",NULL,NULL,  1 << 4,       0,           0,             -1,            -1 },
 	{ "Steam",           NULL,       NULL,    1 << 8,       1,           0,             -1,            -1 },
+	{ "Minigolf22",       NULL,       NULL,    0,            1, 		 0,             -1,            -1     }
 };
 
 /* layout(s) */
