@@ -7,7 +7,11 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
+static const char *fonts[]          = {
+	"monospace:size=10",
+	/* "FiraCode Nerd Font:size=10::antialias=true:autohint=true", */
+};
+/* static const char dmenufont[]       = "FiraCode Nerd Font:size=10:antialias=true:autohint=true"; */
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -96,6 +100,7 @@ static const char *emacsclientcmd[]  = { "emacsclient", "--create-frame", "-a" "
 static const char *keepasscmd[]  = { "keepassxc", NULL };
 static const char *slockcmd[]  = { "slock", NULL };
 static const char *autorandrcmd[]  = { "autorandr", "horizontal", NULL };
+/* static const char *lfcdcmd[]  = { "st", "-e", "lfcd", NULL }; // TODO make this work */
 
 
 #include "movestack.c"
@@ -119,6 +124,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H-%M-%S').png") },
 	{ MODKEY,                       XK_s,         XK_r,      spawn,          {.v = autorandrcmd} },
 	{ MODKEY,                       XK_s,         XK_l,      spawn,          {.v = slockcmd} },
+	/* { MODKEY,                       XK_s,         XK_f,      spawn,          {.v = lfcdcmd} }, */
 
 	/* scratchpads (Mod-a)*/
     { MODKEY,                       XK_a,         XK_j,      scratchpad_show, {.i = 1} },
