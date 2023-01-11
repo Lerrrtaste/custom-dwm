@@ -2911,50 +2911,50 @@ centeredfloatingmaster(Monitor *m)
 	}
 }
 
-void
-bstack(Monitor *m) {
-	int w, h, mh, mx, tx, ty, tw;
-	unsigned int i, n;
-	float mfacts = 0, sfacts = 0;
-	Client *c;
+/* void */
+/* bstack(Monitor *m) { */
+/* 	int w, h, mh, mx, tx, ty, tw; */
+/* 	unsigned int i, n; */
+/* 	float mfacts = 0, sfacts = 0; */
+/* 	Client *c; */
 
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) {
- 		if (n < m->nmaster)
- 			mfacts += c->cfact;
- 		else
- 			sfacts += c->cfact;
-	}
-	if (n == 0)
-		return;
- 	if (n == 1){
- 		c = nexttiled(m->clients);
- 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
- 		return;
- 	}
-	if (n > m->nmaster) {
-		mh = m->nmaster ? m->mfact * m->wh : 0;
-		/* tw = m->ww / (n - m->nmaster); */
-		/* ty = m->wy + mh; */
-	} else {
-		mh = m->wh;
-		/* tw = m->ww; */
-		/* ty = m->wy; */
-	}
-	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
-		if (i < m->nmaster) {
- 			w = (m->ww - mx) * (c->cfact / mfacts);
- 			resize(c, m->wx + mx, m->wy, w - (2*c->bw), mh - 2*c->bw, 0);
- 			if(mx + WIDTH(c) < m->mw)
- 				mx += WIDTH(c);
- 			mfacts -= c->cfact;
-		} else {
- 			w = (m->ww - tx) * (c->cfact / sfacts);
- 			resize(c, m->wx + tx, m->wy + mh, w - (2*c->bw), m->wh - mh - 2*(c->bw), 0);
- 			if(tx + WIDTH(c) < m->mw)
- 				tx += WIDTH(c);
- 			sfacts -= c->cfact;
-		}
-}
+/* 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) { */
+/*  		if (n < m->nmaster) */
+/*  			mfacts += c->cfact; */
+/*  		else */
+/*  			sfacts += c->cfact; */
+/* 	} */
+/* 	if (n == 0) */
+/* 		return; */
+/*  	if (n == 1){ */
+/*  		c = nexttiled(m->clients); */
+/*  		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0); */
+/*  		return; */
+/*  	} */
+/* 	if (n > m->nmaster) { */
+/* 		mh = m->nmaster ? m->mfact * m->wh : 0; */
+/* 		/\* tw = m->ww / (n - m->nmaster); *\/ */
+/* 		/\* ty = m->wy + mh; *\/ */
+/* 	} else { */
+/* 		mh = m->wh; */
+/* 		/\* tw = m->ww; *\/ */
+/* 		/\* ty = m->wy; *\/ */
+/* 	} */
+/* 	for (i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) { */
+/* 		if (i < m->nmaster) { */
+/*  			w = (m->ww - mx) * (c->cfact / mfacts); */
+/*  			resize(c, m->wx + mx, m->wy, w - (2*c->bw), mh - 2*c->bw, 0); */
+/*  			if(mx + WIDTH(c) < m->mw) */
+/*  				mx += WIDTH(c); */
+/*  			mfacts -= c->cfact; */
+/* 		} else { */
+/*  			w = (m->ww - tx) * (c->cfact / sfacts); */
+/*  			resize(c, m->wx + tx, m->wy + mh, w - (2*c->bw), m->wh - mh - 2*(c->bw), 0); */
+/*  			if(tx + WIDTH(c) < m->mw) */
+/*  				tx += WIDTH(c); */
+/*  			sfacts -= c->cfact; */
+/* 		} */
+/* } */
 
 
 /* old */
@@ -2989,45 +2989,45 @@ bstack(Monitor *m) {
 /* } */
 
 /* new */
-void
-bstackhoriz(Monitor *m)
-{
-	unsigned int i, n, w, h, mw, mx, mh, my, ty, tx;
-	float mfacts = 0, sfacts = 0;
-	Client *c;
+/* void */
+/* bstackhoriz(Monitor *m) */
+/* { */
+/* 	unsigned int i, n, w, h, mw, mx, mh, my, ty, tx; */
+/* 	float mfacts = 0, sfacts = 0; */
+/* 	Client *c; */
 
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) {
-		if (n < m->nmaster)
-			mfacts += c->cfact;
-		else
-			sfacts += c->cfact;
-	}
-	if (n == 0)
-		return;
-	if(n == 1){
-		c = nexttiled(m->clients);
-		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
-		return;
-	}
+/* 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) { */
+/* 		if (n < m->nmaster) */
+/* 			mfacts += c->cfact; */
+/* 		else */
+/* 			sfacts += c->cfact; */
+/* 	} */
+/* 	if (n == 0) */
+/* 		return; */
+/* 	if(n == 1){ */
+/* 		c = nexttiled(m->clients); */
+/* 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0); */
+/* 		return; */
+/* 	} */
 
-	if (n > m->nmaster)
-		mh = m->nmaster ? m->wh * m->mfact : 0;
-	else
-		mh = m->wh;
-	mw = m->ww;
+/* 	if (n > m->nmaster) */
+/* 		mh = m->nmaster ? m->wh * m->mfact : 0; */
+/* 	else */
+/* 		mh = m->wh; */
+/* 	mw = m->ww; */
 
- 	for (i = mx = 0, ty = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
-		if (i < m->nmaster) {
-			w = (mw - mx) * (c->cfact / mfacts);
-			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0);
-			/* if(mx + WIDTH(c) < m->mx) */
-			mx += WIDTH(c);
-			mfacts -= c->cfact;
-		} else {
-			h = (m->wh - mh - ty) * (c->cfact / sfacts);
-			resize(c, m->wx, m->wy + mh + ty, mw - 2*c->bw, h - (2*c->bw), 0);
-			if(ty + HEIGHT(c) < m->mh)
-				ty += HEIGHT(c);
-			sfacts -= c->cfact;
-		}
-}
+/*  	for (i = mx = 0, ty = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) { */
+/* 		if (i < m->nmaster) { */
+/* 			w = (mw - mx) * (c->cfact / mfacts); */
+/* 			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), 0); */
+/* 			/\* if(mx + WIDTH(c) < m->mx) *\/ */
+/* 			mx += WIDTH(c); */
+/* 			mfacts -= c->cfact; */
+/* 		} else { */
+/* 			h = (m->wh - mh - ty) * (c->cfact / sfacts); */
+/* 			resize(c, m->wx, m->wy + mh + ty, mw - 2*c->bw, h - (2*c->bw), 0); */
+/* 			if(ty + HEIGHT(c) < m->mh) */
+/* 				ty += HEIGHT(c); */
+/* 			sfacts -= c->cfact; */
+/* 		} */
+/* } */
