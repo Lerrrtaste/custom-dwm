@@ -57,7 +57,8 @@ static const Rule rules[] = {
 	{ "Emacs",  		 NULL,       NULL,    1 << 1,       0,           0,             -1,            -1 },
 	{ "Microsoft Teams - Preview",NULL,NULL,  1 << 4,       0,           0,             -1,            -1 },
 	{ "steam",           NULL,       NULL,    1 << 8,       0,           0,             -1,            -1 },
-	{ "Minigolf22",       NULL,       NULL,    0,            1, 		 0,             -1,            -1     },
+	{ "Godot_Engine", "ProjectMinigolf23", NULL,0,            1, 		     0,             -1,            -1     },
+	{ "Godot_Editor",    "Godot",    NULL,    1 << 2,       0, 		     0,             -1,            -1     },
 	{ NULL, NULL, "Visual Computing Praktikum",0,            0, 		 1,             -1,            -1     }
 };
 
@@ -128,12 +129,12 @@ static Key keys[] = {
 	/* { MODKEY,                       XK_s,         XK_f,      spawn,          {.v = lfcdcmd} }, */
 
 	/* scratchpads (Mod-a)*/
-    { MODKEY,                       XK_a,         XK_j,      scratchpad_show, {.i = 1} },
-    { MODKEY,                       XK_a,         XK_k,      scratchpad_show, {.i = 2} },
-    { MODKEY,                       XK_a,         XK_l,      scratchpad_show, {.i = 3} },
-    { MODKEY|ShiftMask,             XK_a,         XK_j,      scratchpad_hide, {.i = 1} }, // create scratchpad
-    { MODKEY|ShiftMask,             XK_a,         XK_k,      scratchpad_hide, {.i = 2} },
-    { MODKEY|ShiftMask,             XK_a,         XK_l,      scratchpad_hide, {.i = 3} },
+    { MODKEY,                       XK_a,         XK_u,      scratchpad_show, {.i = 1} },
+    /* { MODKEY,                       XK_a,         XK_i,      scratchpad_show, {.i = 2} }, */
+    /* { MODKEY,                       XK_a,         XK_o,      scratchpad_show, {.i = 3} }, */
+    { MODKEY|ShiftMask,             XK_a,         XK_u,      scratchpad_hide, {.i = 1} }, // create scratchpad
+    /* { MODKEY|ShiftMask,             XK_a,         XK_i,      scratchpad_hide, {.i = 2} }, */
+    /* { MODKEY|ShiftMask,             XK_a,         XK_o,      scratchpad_hide, {.i = 3} }, */
 	{ MODKEY|ShiftMask,             XK_a,         XK_r,      scratchpad_remove,           {0} },
 
 	/* switch layouts */
