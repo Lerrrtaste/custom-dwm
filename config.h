@@ -109,14 +109,14 @@ static const char *autorandrcmd[]  = { "autorandr", "horizontal", NULL };
 static Key keys[] = {
 	/* modifier                     chain key   key        function        argument */
 	/* general */
-	{ MODKEY|ShiftMask,             -1,         XK_Return, spawn,          {.v = termcmd } },
+	{ SUPERKEY,             -1,         XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       -1,         XK_b,      togglebar,      {0} },
 	{ MODKEY,                       -1,         XK_Return, zoom,           {0} },
 	{ MODKEY,                       -1,         XK_Tab,    view,           {0} },
 
 	/* programs (Mod-s)*/
 	{ SUPERKEY,                       XK_space,       XK_space,  spawn,          {.v = dmenucmd } },
-	{ MODKEY,                         -1,             XK_p,      spawn,          {.v = dmenucmd } },
+	{ SUPERKEY,                         -1,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ SUPERKEY,                       XK_space,       XK_t,      spawn,          {.v = termcmd } },
 	{ SUPERKEY,                       XK_space,       XK_f,      spawn,          {.v = firefoxcmd } },
 	{ SUPERKEY,                       XK_space,       XK_e,      spawn,          {.v = emacsclientcmd } },
