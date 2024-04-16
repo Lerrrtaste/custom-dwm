@@ -117,10 +117,10 @@ static Key keys[] = {
 	/* programs (Mod-s)*/
 	{ SUPERKEY,                       XK_space,       XK_space,  spawn,          {.v = dmenucmd } },
 	{ SUPERKEY,                         -1,             XK_p,      spawn,          {.v = dmenucmd } },
-	{ SUPERKEY,                       XK_space,       XK_t,      spawn,          {.v = termcmd } },
-	{ SUPERKEY,                       XK_space,       XK_f,      spawn,          {.v = firefoxcmd } },
-	{ SUPERKEY,                       XK_space,       XK_e,      spawn,          {.v = emacsclientcmd } },
-	{ SUPERKEY,                       XK_space,       XK_k,      spawn,          {.v = keepasscmd } },
+	{ SUPERKEY,                       -1,       XK_t,      spawn,          {.v = termcmd } },
+	{ SUPERKEY,                       -1,       XK_f,      spawn,          {.v = firefoxcmd } },
+	{ SUPERKEY,                       -1,       XK_e,      spawn,          {.v = emacsclientcmd } },
+	{ SUPERKEY,                       -1,       XK_k,      spawn,          {.v = keepasscmd } },
 
 	/* shortcuts */
 	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H-%M-%S').png") },
@@ -145,7 +145,7 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         XK_u,      setlayout,      {.v = &layouts[4]} }, // centered master
 	{ MODKEY,                       -1,         XK_o,      setlayout,      {.v = &layouts[5]} }, // centered floating master
 	{ MODKEY|ShiftMask,             -1,         XK_t,      setlayout,      {.v = &layouts[6]} }, // bottom stack
-	{ MODKEY|ShiftMask,             -1,         XK_h,      setlayout,      {.v = &layouts[7]} }, // bottom stack horizontal
+	{ MODKEY|ShiftMask,             -1,         XK_b,      setlayout,      {.v = &layouts[7]} }, // bottom stack horizontal
 	{ MODKEY,                       -1,         XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             -1,         XK_space,  togglefloating, {0} },
 
