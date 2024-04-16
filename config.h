@@ -129,13 +129,13 @@ static Key keys[] = {
 	/* { MODKEY,                       XK_s,         XK_f,      spawn,          {.v = lfcdcmd} }, */
 
 	/* scratchpads (Mod-a)*/
-    { MODKEY,                       XK_a,         XK_u,      scratchpad_show, {.i = 1} },
-    /* { MODKEY,                       XK_a,         XK_i,      scratchpad_show, {.i = 2} }, */
+    { MODKEY,                       -1,         XK_w,      scratchpad_show, {.i = 1} },
+    { MODKEY,                       -1,         XK_y,      scratchpad_show, {.i = 2} },
     /* { MODKEY,                       XK_a,         XK_o,      scratchpad_show, {.i = 3} }, */
-    { MODKEY|ShiftMask,             XK_a,         XK_u,      scratchpad_hide, {.i = 1} }, // create scratchpad
-    /* { MODKEY|ShiftMask,             XK_a,         XK_i,      scratchpad_hide, {.i = 2} }, */
+    { MODKEY|ShiftMask,             -1,         XK_w,      scratchpad_hide, {.i = 1} }, // create scratchpad
+    { MODKEY|ShiftMask,             -1,         XK_y,      scratchpad_hide, {.i = 2} },
     /* { MODKEY|ShiftMask,             XK_a,         XK_o,      scratchpad_hide, {.i = 3} }, */
-	{ MODKEY|ShiftMask,             XK_a,         XK_r,      scratchpad_remove,           {0} },
+	{ MODKEY|ShiftMask,             -1,         XK_r,      scratchpad_remove,           {0} },
 
 	/* switch layouts */
 	{ MODKEY,                       -1,         XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
