@@ -165,10 +165,10 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         XK_k,      focusstack,     {.i = -1 } },
 
 	/* monitors */
-	{ MODKEY|ShiftMask,             -1,         XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             -1,         XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       -1,         XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       -1,         XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             -1,         XK_comma,  tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             -1,         XK_period, tagmon,         {.i = -1 } },
+	{ MODKEY,                       -1,         XK_comma,  focusmon,       {.i = +1 } },
+	{ MODKEY,                       -1,         XK_period, focusmon,       {.i = -1 } },
 
 	/* tags */
 	{ MODKEY,                       -1,         XK_0,      view,           {.ui = ~0 } },
