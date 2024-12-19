@@ -35,14 +35,15 @@ static const char *const autostart[] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[] = {
 	"", // Web
-	"", // Emacs
-	"", // Shells
-	"4",
-	"", // Comms
-	"6",
-	"7",
-	"8",
-	"9"
+	"", // Emacs / IDEs
+	"", // Terminals / Background Tasks
+	"", // Documentation / Notes
+	"󰭹 "// Comms
+	"󰣳", //homelab
+	"", //media
+	"", //misc
+	"", //misc
+	"" // Games
 };
 static const int momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
@@ -60,6 +61,10 @@ static const Rule rules[] = {
 	{ "Godot_Engine", "ProjectMinigolf23", NULL,0,            1, 		     0,             -1,            -1     },
 	{ "Godot_Editor",    "Godot",    NULL,    1 << 2,       0, 		     0,             -1,            -1     },
 	{ NULL, NULL, "Visual Computing Praktikum",0,            0, 		 1,             -1,            -1     }
+
+	// Notes / Docs
+	{ NULL,             NULL,       "Joplin",  1 << 3,      0, 		    0,             -1,            -1     }
+	{ NULL,             NULL,       "Signal",  1 << 4,      0, 		    0,             -1,            -1     }
 };
 
 /* layout(s) */
