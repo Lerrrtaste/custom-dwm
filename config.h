@@ -60,10 +60,10 @@ static const Rule rules[] = {
 	{ "steam",           NULL,       NULL,    1 << 8,       0,           0,             -1,            -1 },
 	{ "Godot_Engine", "ProjectMinigolf23", NULL,0,            1, 		     0,             -1,            -1     },
 	{ "Godot_Editor",    "Godot",    NULL,    1 << 2,       0, 		     0,             -1,            -1     },
-	{ NULL, NULL, "Visual Computing Praktikum",0,            0, 		 1,             -1,            -1     }
+	{ NULL, NULL, "Visual Computing Praktikum",0,            0, 		 1,             -1,            -1     },
 
 	// Notes / Docs
-	{ NULL,             NULL,       "Joplin",  1 << 3,      0, 		    0,             -1,            -1     }
+	{ NULL,             NULL,       "Joplin",  1 << 3,      0, 		    0,             -1,            -1     },
 	{ NULL,             NULL,       "Signal",  1 << 4,      0, 		    0,             -1,            -1     }
 };
 
