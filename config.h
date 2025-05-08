@@ -54,7 +54,7 @@ static const Rule rules[] = {
 	 */
 	/* class      	     instance    title    tags mask     isfloating   isterminal      noswallow     monitor */
 	{ "st-256color",     NULL,       NULL,    0,            0,     	     1,              -1,            -1 },
-	{ "firefox",         NULL,       NULL,    1 << 0,       0,           0,             -1,            -1 },
+	{ "librewolf",         NULL,       NULL,    1 << 0,       0,           0,             -1,            -1 },
 	{ "Emacs",  		 NULL,       NULL,    1 << 1,       0,           0,             -1,            -1 },
 	{ "Microsoft Teams - Preview",NULL,NULL,  1 << 4,       0,           0,             -1,            -1 },
 	{ "steam",           NULL,       NULL,    1 << 8,       0,           0,             -1,            -1 },
@@ -102,7 +102,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *firefoxcmd[]  = { "firefox", "--new-window", NULL };
+static const char *firefoxcmd[]  = { "librewolf", "--new-window", NULL };
 static const char *emacsclientcmd[]  = { "emacsclient", "--create-frame", "-a" "emacs", NULL };
 static const char *keepasscmd[]  = { "keepassxc", NULL };
 static const char *slockcmd[]  = { "slock", NULL };
