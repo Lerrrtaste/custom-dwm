@@ -54,13 +54,32 @@ static const Rule rules[] = {
 	 */
 	/* class      	     instance    title    tags mask     isfloating   isterminal      noswallow     monitor */
 	{ "st-256color",     NULL,       NULL,    0,            0,     	     1,              -1,            -1 },
+
+
+	//1: - Web
 	{ "librewolf",         NULL,       NULL,    1 << 0,       0,           0,             -1,            -1 },
+
+	//2: - Emacs / Code
 	{ "Emacs",  		 NULL,       NULL,    1 << 1,       0,           0,             -1,            -1 },
+
+	// 3: Project Specific (GUI Editor, IDE, Engine, Logs)
+	{ NULL,    NULL,    "Godot",               1 << 2,       0, 		     0,             0,            -1     },
+	{ NULL,    NULL,    "Screeps",             1 << 2,       0, 		     0,             0,            -1     },
+	{ NULL,    NULL,    "podman",              1 << 2,       0, 		     0,             0,            -1     },
+	{ NULL,    NULL,    "podman",              1 << 2,       0, 		     0,             0,            -1     },
+
+	// 4: Docs + Notes
+	{ "Joplin",         NULL,       NULL,    1 << 0,       0,           0,             -1,            -1 },
+
+	// 5:  Comms
+	{ "librewolf",         NULL,       NULL,    1 << 0,       0,           0,             -1,            -1 },
 	{ "Microsoft Teams - Preview",NULL,NULL,  1 << 4,       0,           0,             -1,            -1 },
+
+	// 6 Fun / Music / Podcast
+
+
+	// 9 Gaming / Long Background Tasks
 	{ "steam",           NULL,       NULL,    1 << 8,       0,           0,             -1,            -1 },
-	{ "Godot_Engine", "ProjectMinigolf23", NULL,0,            1, 		     0,             -1,            -1     },
-	{ "Godot_Editor",    "Godot",    NULL,    1 << 2,       0, 		     0,             -1,            -1     },
-	{ NULL, NULL, "Visual Computing Praktikum",0,            0, 		 1,             -1,            -1     },
 
 	// Notes / Docs
 	{ NULL,             NULL,       "Joplin",  1 << 3,      0, 		    0,             -1,            -1     },
