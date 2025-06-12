@@ -117,40 +117,132 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
+
+/* COMMANDS */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+
+
+// spawn st
 static const char *termcmd[]  = { "st", NULL };
+
+// macos mode
+static const char *macosquickstart[]  = { "quickemu", "--vm", "/media/data1/vms/macos-ventura.conf", "--fullscreen", "--display", "spice", NULL };
+static const char *macoskill[]  = { "quickemu", "--vm", "/media/data1/vms/macos-ventura.conf", "--kill", NULL };
+static const char *macoskillalt[]  = { "pkill", "macos", NULL };
+
+// dmenu for all programs
+static const char *dmenuallcmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+
+// productivity browser (wavebox)
+static const char *prodbrowsercmd[]  = { "librewolf", "--new-window", NULL };
+
+// firefox distro
 static const char *firefoxcmd[]  = { "librewolf", "--new-window", NULL };
+
 static const char *emacsclientcmd[]  = { "emacsclient", "--create-frame", "-a" "emacs", NULL };
 static const char *keepasscmd[]  = { "keepassxc", NULL };
 static const char *slockcmd[]  = { "slock", NULL };
 static const char *autorandrcmd[]  = { "autorandr", "horizontal", NULL };
+static const char *maimrect[]  = { "maim", "-s", "-u", "-f png", "-q", "-o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H-%M-%S').png", NULL };
+static const char *maimfull[]  = { "maim", "-u", "-f png", "-q", "-o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H-%M-%S').png", NULL };
+static const char *screensaver[]  = { "xscreensaver", NULL };
+static const char *dmenuprograms[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 /* static const char *lfcdcmd[]  = { "st", "-e", "lfcd", NULL }; // TODO make this work */
 
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     chain key   key        function        argument */
-	/* general */
-	{ SUPERKEY,             -1,         XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       -1,         XK_b,      togglebar,      {0} },
-	{ MODKEY,                       -1,         XK_Return, zoom,           {0} },
-	{ MODKEY,                       -1,         XK_Tab,    view,           {0} },
 
-	/* programs (Mod-s)*/
-	{ SUPERKEY,                       XK_space,       XK_space,  spawn,          {.v = dmenucmd } },
-	{ SUPERKEY,                         -1,             XK_p,      spawn,          {.v = dmenucmd } },
-	{ SUPERKEY,                       -1,       XK_t,      spawn,          {.v = termcmd } },
-	{ SUPERKEY,                       -1,       XK_f,      spawn,          {.v = firefoxcmd } },
-	{ SUPERKEY,                       -1,       XK_e,      spawn,          {.v = emacsclientcmd } },
-	{ SUPERKEY,                       -1,       XK_k,      spawn,          {.v = keepasscmd } },
 
-	/* shortcuts */
-	{ MODKEY,                       XK_s,       XK_m,      spawn,          SHCMD("maim -s -u -f png -q -o /home/lerrrtaste/screenshots/screenshot_$(date +'%Y-%m-%dT%H-%M-%S').png") },
-	{ MODKEY,                       XK_s,         XK_r,      spawn,          {.v = autorandrcmd} },
+/* Experimental */
+
+	/* { MODKEY|ShiftMask,             XK_c,         XK_k,      quitprompt,          {.v = macoskillalt } }, // macos kill alt */
+	/*TODO read (from gpt) { MODKEY|ShiftMask,             XK_c,         XK_s,      spawn,          {.v = screensaver } }, // xscreensaver */
+	/* { MODKEY|ShiftMask,             XK_c,         XK_0,      quitprompt,           {0} }, */
+
+
+
+
+
+    /*
+	 * BASICS
+	 *
+	 * SUPERKEY + Space:
+	 * spawn terminal (st, termcmd func)
+	 *
+	 * */
+	{ SUPERKEY,         -1,         XK_Return,         spawn,          {.v = termcmd } },
+
+	/*
+	 * DMENU
+	 *
+	 * SUPERKEY + P:
+	 * spawn dmenu all (dmenucmd func)
+	 *
+	 * */
+	/* { SUPERKEY,                       XK_space,       XK_space,  spawn,          {.v = dmenuallcmd } }, */
+	{ SUPERKEY,                         -1,             XK_p,      spawn,          {.v = dmenuallcmd } },
+
+
+	/* misc */
+	{ MODKEY,                       -1,         XK_b,       togglebar,      {0} }, // toggle bar
+	{ MODKEY,                       -1,         XK_Return, 	zoom,           {0} }, // zoom FIXME
+	{ MODKEY,                       -1,         XK_Tab,     view,           {0} }, // toggle last tag
+
+	/* // DMenu and st: */
+	/* { SUPERKEY, 					-1,         XK_Return, spawn,          {.v = termcmd } }, */
+	/* { SUPERKEY,               XK_space,         XK_space,  spawn,          {.v = dmenucmd } }, */
+
+
+	/* tools */
+
+	// Screenshot rect: MOD-s m -> rectangle select to /home/lerrrtaste/screenshots
+	{ MODKEY,  						XK_s,       XK_m,      spawn,          {.v = maimrect} },
+	// Screenshot full: MOD-s M -> fullscreen screen
+	{ MODKEY, 						XK_s,       XK_M,      spawn,          {.v = maimfull} },
+
+	// Mod s - l: screensaver
 	{ MODKEY,                       XK_s,         XK_l,      spawn,          {.v = slockcmd} },
-	/* { MODKEY,                       XK_s,         XK_f,      spawn,          {.v = lfcdcmd} }, */
+	// Mod s - x: apply auto auotrandr profile
+	{ MODKEY,                       XK_s,         XK_x,      spawn,          SHCMD("autorandr --change") }, // trigger autorandr
+
+
+
+	/* General Software */
+
+	// EMACS: super e
+	{ SUPERKEY,                       -1,       XK_e,      spawn,          {.v = emacsclientcmd } },
+
+	// LibreWolf: super f
+	{ SUPERKEY,                       -1,       XK_f,      spawn,          {.v = firefoxcmd } },
+
+	// Protonmail: super s - m
+	{ SUPERKEY,                       XK_s,     XK_p,      spawn,          SHCMD("proton-mail") },
+
+	// ProtonVPN: super s - v
+	{ SUPERKEY,                       XK_s,    XK_v,      spawn,          SHCMD("proton-vpn-gui") },
+
+	// IVPN: super s - i
+	{ SUPERKEY,                       XK_s,       XK_i,      spawn,          SHCMD("ivpn") },
+
+	// macos
+	{ MODKEY|ShiftMask,             XK_c,         XK_m,      spawn,          {.v = macoskill } }, // macos kill
+	{ MODKEY|ShiftMask,             XK_s,         XK_m,      spawn,          {.v = macosquickstart } }, // macos quickstart
+
+	/* Password Manager */
+	//  Super k - k: keepassxc
+	{ SUPERKEY,                       XK_k,    XK_k,      spawn,          {.v = keepasscmd } },
+
+	// super k - p: proton-pass
+	{ SUPERKEY,                       XK_k,    XK_p,      spawn,          SHCMD("proton-pass") },
+
+	// Super s - b: bitwarden
+	{ SUPERKEY,                       XK_k,    XK_m,      spawn,          SHCMD("bitwarden") },
+
+	// Super s - b: bitwarden
+	{ SUPERKEY,                       XK_k,    XK_y,      spawn,          SHCMD("yubioath-flutter") },
+
 
 	/* scratchpads (Mod-a)*/
     { MODKEY,                       -1,         XK_w,      scratchpad_show, {.i = 1} },
